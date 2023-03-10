@@ -71,14 +71,17 @@ class Periods_chain
         end_date = start_date.next_year
         [end_date, 0]
         end
-    
+
         def calc
         date_start = Date.strptime(@start_date, "%d.%m.%Y")
         date_end = date_start
         @periods.each do |period|
-            if period =~ /^\d{4}M\d{1,2}D\d{1,2}$/ && (date_start.year == Date.strptime(period, "%YM%mD%d").year && date_start.month == Date.strptime(period, "%YM%m").month && date_start.day == Date.strptime(period, "%YM%mD%d").day)
+            if period =~ /^\d{4}M\d{1,2}D\d{1,2}$/ && (date_start.year == Date.strptime(period, "%YM%mD%d").year &&
+                                                       date_start.month == Date.strptime(period, "%YM%m").month && 
+                                                       date_start.day == Date.strptime(period, "%YM%mD%d").day)
             date_start, date_end = daily(date_start)
-            elsif period =~ /^\d{4}M\d{1,2}$/ && (date_start.year == Date.strptime(period, "%YM%m").year && date_start.month == Date.strptime(period, "%YM%m").month)
+            elsif period =~ /^\d{4}M\d{1,2}$/ && (date_start.year == Date.strptime(period, "%YM%m").year &&
+                                                  date_start.month == Date.strptime(period, "%YM%m").month)
             date_start, date_end = monthly(date_start)
             elsif period =~ /^\d{4}$/ && (date_start.year == Date.strptime(period, "%Y").year)
             date_start, date_end = annually(date_start)
@@ -108,7 +111,7 @@ all_periods.each do |periods|
   dates.valid?
 end
 
-puts " Проверка добавления периода к концу с цепочки "
+puts " Проверка добавления периода к концу цепочки "
 
 start_date = "30.01.2023"
 period = ["2023M1D30", "2023M1", "2023M2", "2023", "2024M3", "2024M4D30", "2024M5"]
